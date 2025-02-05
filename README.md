@@ -1,6 +1,7 @@
 This is Vulnerable Web Application developed for course by Cyber Security and Privacy Foundation
 (www.cysecurity.org) for Java programmers
 
+
 Get the VulnerableSpring Project from here:
 https://github.com/breakthesec/VulnerableSpring
 
