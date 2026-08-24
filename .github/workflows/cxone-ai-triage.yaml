@@ -1,0 +1,19 @@
+name: CxOne AI Triage
+
+on:
+  repository_dispatch:
+    types: [cxone-ai-triage]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log incoming Jira payload
+        run: |
+          echo "Jira Key: ${{ github.event.client_payload.jira_issue.key }}"
+          echo "Summary: ${{ github.event.client_payload.jira_issue.summary }}"
+          echo "Project: ${{ github.event.client_payload.jira_issue.project }}"
+          echo "URL: ${{ github.event.client_payload.jira_issue.url }}"
+          echo "description: ${{ github.event.client_payload.jira_issue.description }}"
+
+    
