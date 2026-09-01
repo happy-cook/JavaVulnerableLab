@@ -17,8 +17,8 @@ jobs:
           echo "Project: ${{ github.event.client_payload.jira_issue.project }}"
           echo "URL: ${{ github.event.client_payload.jira_issue.url }}"
           echo "description: ${{ github.event.client_payload.jira_issue.description }}"
-          echo "scan Id: ${{ github.event.client_payload.jira_issue.customfield_10207 }}"
-          echo "Vulnerability Id 1: ${{ github.event.client_payload.jira_issue.customfield_10208 }}"
+          echo "scan Id: ${{ github.event.client_payload.jira_issue.scanId }}"
+          echo "Vulnerability Id 1: ${{ github.event.client_payload.jira_issue.VulnerabilityId1 }}"
           # 完整打印 subtasks 原始JSON
           echo "==== Subtasks raw payload ===="
           echo '${{ toJSON(github.event.client_payload.jira_issue.subtasks) }}'
