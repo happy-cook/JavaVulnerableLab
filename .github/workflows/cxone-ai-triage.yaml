@@ -1,10 +1,12 @@
 name: CxOne AI Triage
 
 on:
+
   repository_dispatch:
     types: [cxone-ai-triage]
 
 jobs:
+
   triage:
     runs-on: ubuntu-latest
     steps:
@@ -15,5 +17,22 @@ jobs:
           echo "Project: ${{ github.event.client_payload.jira_issue.project }}"
           echo "URL: ${{ github.event.client_payload.jira_issue.url }}"
           echo "description: ${{ github.event.client_payload.jira_issue.description }}"
+          # 完整打印 subtasks 原始JSON
+          echo "==== Subtasks raw payload ===="
+          echo '${{ toJSON(github.event.client_payload.jira_issue.subtasks) }}'
+ 
+      - name: Iterate & print each subtask detail
 
-    
+        if: github.event.client_payload.jira_issue.subtasks != '[]'
+        run: |
+          echo "==== List each subtask ===="
+          SUBTASKS='${{ toJSON(github.event.client_payload.jira_issue.subtasks) }}'
+          echo "$SUBTASKS" | jq -c '.[]' | while read -r item; do
+            key=$(echo "$item" | jq -r '.key')
+            summary=$(echo "$item" | jq -r '.summary')
+            status=$(echo "$item" | jq -r '.status')
+            assignee=$(echo "$item" | jq -r '.assignee')
+            echo "Subtask >> key=$key | summary=$summary | status=$status | assignee=$assignee"
+          done
+
+ 
